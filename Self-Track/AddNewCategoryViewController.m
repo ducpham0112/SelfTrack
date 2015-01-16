@@ -8,9 +8,11 @@
 
 #import "AddNewCategoryViewController.h"
 #import "CoreDataFunctions.h"
+#import "NKOColorPickerView.h"
 
 @interface AddNewCategoryViewController ()
 
+@property(nonatomic, strong) NSArray        *sliceColors;
 @end
 
 @implementation AddNewCategoryViewController
@@ -18,7 +20,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController setTitle:@"Add New Category"];
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackground)];
+    [self.view addGestureRecognizer:tapGesture];
+    
+    __weak AddNewCategoryViewController *weakSelf = self;
+    
+    [self.colorPicker setDidChangeColorBlock:^(UIColor *color){
+        [weakSelf setPickedColor];
+    }];
+    
+    [self.colorPicker setTintColor:[UIColor darkGrayColor]];
+    
+    [self setPickedColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,12 +51,29 @@
 
 - (IBAction)addCategory:(id)sender {
     [_tfCategoryName resignFirstResponder];
-    if ([CoreDataFunctions addNewCategoryWithName:_tfCategoryName.text]) {
+    if ([CoreDataFunctions addNewCategoryWithName:_tfCategoryName.text withChartColor:self.colorPicker.color]) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ERROR!" message:@"Something wrong! Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ERROR!" message:@"Something wrong! Please try again." delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:@"Dismiss", nil];
         [alert show];
     }
     
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (void)setPickedColor
+{
+    self.pickedColor.layer.cornerRadius = 6;
+    self.pickedColor.backgroundColor = self.colorPicker.color;
+}
+
+-(void) tapBackground{
+    [_tfCategoryName resignFirstResponder];
+}
+
 @end

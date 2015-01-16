@@ -7,8 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F831AA4E1A67AA0F00570B7C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F831AA4D1A67AA0F00570B7C /* QuartzCore.framework */; };
 		F896DDDF1A6660B600692C69 /* AddNewCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F896DDDE1A6660B600692C69 /* AddNewCategoryViewController.m */; };
 		F8B472981A661D0D0053AE08 /* CoreDataFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B472971A661D0D0053AE08 /* CoreDataFunctions.m */; };
+		F8EBCE911A68F3E5006128AC /* MyPieViewLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EBCE8E1A68F3E5006128AC /* MyPieViewLayer.m */; };
+		F8EBCE921A68F3E5006128AC /* MyPieElement.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EBCE901A68F3E5006128AC /* MyPieElement.m */; };
+		F8EBCE9F1A68F769006128AC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EBCE9E1A68F769006128AC /* CoreGraphics.framework */; };
+		F8EBCEA11A68F774006128AC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EBCEA01A68F774006128AC /* Foundation.framework */; };
+		F8EBCEA31A68F77C006128AC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EBCEA21A68F77C006128AC /* UIKit.framework */; };
+		F8EBCEFF1A68FBE2006128AC /* NSMutableArray+pieEx.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EBCEFA1A68FBE2006128AC /* NSMutableArray+pieEx.m */; };
+		F8EBCF001A68FBE2006128AC /* PieElement.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EBCEFC1A68FBE2006128AC /* PieElement.m */; };
+		F8EBCF011A68FBE2006128AC /* PieLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EBCEFE1A68FBE2006128AC /* PieLayer.m */; };
+		F8EBCF091A690A9D006128AC /* nko_brightness_guide.png in Resources */ = {isa = PBXBuildFile; fileRef = F8EBCF041A690A9D006128AC /* nko_brightness_guide.png */; };
+		F8EBCF0A1A690A9D006128AC /* nko_brightness_guide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8EBCF051A690A9D006128AC /* nko_brightness_guide@2x.png */; };
+		F8EBCF0B1A690A9D006128AC /* nko_colormap.png in Resources */ = {isa = PBXBuildFile; fileRef = F8EBCF061A690A9D006128AC /* nko_colormap.png */; };
+		F8EBCF0C1A690A9D006128AC /* NKOColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EBCF081A690A9D006128AC /* NKOColorPickerView.m */; };
+		F8EBCF0F1A691350006128AC /* TimeTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EBCF0E1A691350006128AC /* TimeTrack.m */; };
+		F8EBCF121A691351006128AC /* CategoryTracked.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EBCF111A691351006128AC /* CategoryTracked.m */; };
 		F8F52F8F1A66166F00E9F478 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F52F8E1A66166F00E9F478 /* main.m */; };
 		F8F52F921A66166F00E9F478 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F52F911A66166F00E9F478 /* AppDelegate.m */; };
 		F8F52F951A66166F00E9F478 /* Self_Track.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F8F52F931A66166F00E9F478 /* Self_Track.xcdatamodeld */; };
@@ -17,8 +32,8 @@
 		F8F52F9D1A66166F00E9F478 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8F52F9C1A66166F00E9F478 /* Images.xcassets */; };
 		F8F52FA01A66166F00E9F478 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8F52F9E1A66166F00E9F478 /* LaunchScreen.xib */; };
 		F8F52FAC1A66166F00E9F478 /* Self_TrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F52FAB1A66166F00E9F478 /* Self_TrackTests.m */; };
-		F8F52FB71A66178600E9F478 /* TimeTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F52FB61A66178600E9F478 /* TimeTrack.m */; };
-		F8F52FBA1A66178600E9F478 /* CategoryTracked.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F52FB91A66178600E9F478 /* CategoryTracked.m */; };
+		F8FCBF4A1A68B783002797D8 /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FCBF481A68B783002797D8 /* CategoryTableViewCell.m */; };
+		F8FCBF4B1A68B783002797D8 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8FCBF491A68B783002797D8 /* CategoryTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,10 +47,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F831AA4D1A67AA0F00570B7C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F896DDDD1A6660B600692C69 /* AddNewCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewCategoryViewController.h; sourceTree = "<group>"; };
 		F896DDDE1A6660B600692C69 /* AddNewCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewCategoryViewController.m; sourceTree = "<group>"; };
 		F8B472961A661D0D0053AE08 /* CoreDataFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataFunctions.h; sourceTree = "<group>"; };
 		F8B472971A661D0D0053AE08 /* CoreDataFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataFunctions.m; sourceTree = "<group>"; };
+		F8EBCE8D1A68F3E5006128AC /* MyPieViewLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPieViewLayer.h; sourceTree = "<group>"; };
+		F8EBCE8E1A68F3E5006128AC /* MyPieViewLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPieViewLayer.m; sourceTree = "<group>"; };
+		F8EBCE8F1A68F3E5006128AC /* MyPieElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPieElement.h; sourceTree = "<group>"; };
+		F8EBCE901A68F3E5006128AC /* MyPieElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPieElement.m; sourceTree = "<group>"; };
+		F8EBCE9E1A68F769006128AC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F8EBCEA01A68F774006128AC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F8EBCEA21A68F77C006128AC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F8EBCEF81A68FBE2006128AC /* MagicPieLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicPieLayer.h; sourceTree = "<group>"; };
+		F8EBCEF91A68FBE2006128AC /* NSMutableArray+pieEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+pieEx.h"; sourceTree = "<group>"; };
+		F8EBCEFA1A68FBE2006128AC /* NSMutableArray+pieEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+pieEx.m"; sourceTree = "<group>"; };
+		F8EBCEFB1A68FBE2006128AC /* PieElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieElement.h; sourceTree = "<group>"; };
+		F8EBCEFC1A68FBE2006128AC /* PieElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieElement.m; sourceTree = "<group>"; };
+		F8EBCEFD1A68FBE2006128AC /* PieLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieLayer.h; sourceTree = "<group>"; };
+		F8EBCEFE1A68FBE2006128AC /* PieLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieLayer.m; sourceTree = "<group>"; };
+		F8EBCF041A690A9D006128AC /* nko_brightness_guide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nko_brightness_guide.png; sourceTree = "<group>"; };
+		F8EBCF051A690A9D006128AC /* nko_brightness_guide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nko_brightness_guide@2x.png"; sourceTree = "<group>"; };
+		F8EBCF061A690A9D006128AC /* nko_colormap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nko_colormap.png; sourceTree = "<group>"; };
+		F8EBCF071A690A9D006128AC /* NKOColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKOColorPickerView.h; sourceTree = "<group>"; };
+		F8EBCF081A690A9D006128AC /* NKOColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKOColorPickerView.m; sourceTree = "<group>"; };
+		F8EBCF0D1A691350006128AC /* TimeTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTrack.h; sourceTree = "<group>"; };
+		F8EBCF0E1A691350006128AC /* TimeTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTrack.m; sourceTree = "<group>"; };
+		F8EBCF101A691351006128AC /* CategoryTracked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTracked.h; sourceTree = "<group>"; };
+		F8EBCF111A691351006128AC /* CategoryTracked.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTracked.m; sourceTree = "<group>"; };
 		F8F52F891A66166F00E9F478 /* Self-Track.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Self-Track.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F52F8D1A66166F00E9F478 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8F52F8E1A66166F00E9F478 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -50,10 +89,9 @@
 		F8F52FA51A66166F00E9F478 /* Self-TrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Self-TrackTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F52FAA1A66166F00E9F478 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8F52FAB1A66166F00E9F478 /* Self_TrackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Self_TrackTests.m; sourceTree = "<group>"; };
-		F8F52FB51A66178600E9F478 /* TimeTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTrack.h; sourceTree = "<group>"; };
-		F8F52FB61A66178600E9F478 /* TimeTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTrack.m; sourceTree = "<group>"; };
-		F8F52FB81A66178600E9F478 /* CategoryTracked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTracked.h; sourceTree = "<group>"; };
-		F8F52FB91A66178600E9F478 /* CategoryTracked.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTracked.m; sourceTree = "<group>"; };
+		F8FCBF471A68B783002797D8 /* CategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewCell.h; sourceTree = "<group>"; };
+		F8FCBF481A68B783002797D8 /* CategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewCell.m; sourceTree = "<group>"; };
+		F8FCBF491A68B783002797D8 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +99,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8EBCEA31A68F77C006128AC /* UIKit.framework in Frameworks */,
+				F8EBCEA11A68F774006128AC /* Foundation.framework in Frameworks */,
+				F8EBCE9F1A68F769006128AC /* CoreGraphics.framework in Frameworks */,
+				F831AA4E1A67AA0F00570B7C /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,9 +116,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F8EBCEF71A68FBE2006128AC /* MagicPieLayer */ = {
+			isa = PBXGroup;
+			children = (
+				F8EBCEF81A68FBE2006128AC /* MagicPieLayer.h */,
+				F8EBCEF91A68FBE2006128AC /* NSMutableArray+pieEx.h */,
+				F8EBCEFA1A68FBE2006128AC /* NSMutableArray+pieEx.m */,
+				F8EBCEFB1A68FBE2006128AC /* PieElement.h */,
+				F8EBCEFC1A68FBE2006128AC /* PieElement.m */,
+				F8EBCEFD1A68FBE2006128AC /* PieLayer.h */,
+				F8EBCEFE1A68FBE2006128AC /* PieLayer.m */,
+			);
+			path = MagicPieLayer;
+			sourceTree = "<group>";
+		};
+		F8EBCF021A690A9D006128AC /* NKO-Color-Picker */ = {
+			isa = PBXGroup;
+			children = (
+				F8EBCF031A690A9D006128AC /* Assets */,
+				F8EBCF071A690A9D006128AC /* NKOColorPickerView.h */,
+				F8EBCF081A690A9D006128AC /* NKOColorPickerView.m */,
+			);
+			path = "NKO-Color-Picker";
+			sourceTree = "<group>";
+		};
+		F8EBCF031A690A9D006128AC /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				F8EBCF041A690A9D006128AC /* nko_brightness_guide.png */,
+				F8EBCF051A690A9D006128AC /* nko_brightness_guide@2x.png */,
+				F8EBCF061A690A9D006128AC /* nko_colormap.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		F8F52F801A66166F00E9F478 = {
 			isa = PBXGroup;
 			children = (
+				F8EBCEA21A68F77C006128AC /* UIKit.framework */,
+				F8EBCEA01A68F774006128AC /* Foundation.framework */,
+				F8EBCE9E1A68F769006128AC /* CoreGraphics.framework */,
+				F831AA4D1A67AA0F00570B7C /* QuartzCore.framework */,
 				F8F52F8B1A66166F00E9F478 /* Self-Track */,
 				F8F52FA81A66166F00E9F478 /* Self-TrackTests */,
 				F8F52F8A1A66166F00E9F478 /* Products */,
@@ -95,6 +175,12 @@
 		F8F52F8B1A66166F00E9F478 /* Self-Track */ = {
 			isa = PBXGroup;
 			children = (
+				F8EBCF021A690A9D006128AC /* NKO-Color-Picker */,
+				F8EBCEF71A68FBE2006128AC /* MagicPieLayer */,
+				F8EBCE8D1A68F3E5006128AC /* MyPieViewLayer.h */,
+				F8EBCE8E1A68F3E5006128AC /* MyPieViewLayer.m */,
+				F8EBCE8F1A68F3E5006128AC /* MyPieElement.h */,
+				F8EBCE901A68F3E5006128AC /* MyPieElement.m */,
 				F8F52F901A66166F00E9F478 /* AppDelegate.h */,
 				F8F52F911A66166F00E9F478 /* AppDelegate.m */,
 				F8F52F961A66166F00E9F478 /* ViewController.h */,
@@ -103,15 +189,18 @@
 				F8F52F9C1A66166F00E9F478 /* Images.xcassets */,
 				F8F52F9E1A66166F00E9F478 /* LaunchScreen.xib */,
 				F8F52F931A66166F00E9F478 /* Self_Track.xcdatamodeld */,
+				F8EBCF101A691351006128AC /* CategoryTracked.h */,
+				F8EBCF111A691351006128AC /* CategoryTracked.m */,
+				F8EBCF0D1A691350006128AC /* TimeTrack.h */,
+				F8EBCF0E1A691350006128AC /* TimeTrack.m */,
 				F8F52F8C1A66166F00E9F478 /* Supporting Files */,
-				F8F52FB81A66178600E9F478 /* CategoryTracked.h */,
-				F8F52FB91A66178600E9F478 /* CategoryTracked.m */,
-				F8F52FB51A66178600E9F478 /* TimeTrack.h */,
-				F8F52FB61A66178600E9F478 /* TimeTrack.m */,
 				F8B472961A661D0D0053AE08 /* CoreDataFunctions.h */,
 				F8B472971A661D0D0053AE08 /* CoreDataFunctions.m */,
 				F896DDDD1A6660B600692C69 /* AddNewCategoryViewController.h */,
 				F896DDDE1A6660B600692C69 /* AddNewCategoryViewController.m */,
+				F8FCBF471A68B783002797D8 /* CategoryTableViewCell.h */,
+				F8FCBF481A68B783002797D8 /* CategoryTableViewCell.m */,
+				F8FCBF491A68B783002797D8 /* CategoryTableViewCell.xib */,
 			);
 			path = "Self-Track";
 			sourceTree = "<group>";
@@ -222,9 +311,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8EBCF091A690A9D006128AC /* nko_brightness_guide.png in Resources */,
 				F8F52F9B1A66166F00E9F478 /* Main.storyboard in Resources */,
+				F8EBCF0B1A690A9D006128AC /* nko_colormap.png in Resources */,
 				F8F52FA01A66166F00E9F478 /* LaunchScreen.xib in Resources */,
+				F8EBCF0A1A690A9D006128AC /* nko_brightness_guide@2x.png in Resources */,
 				F8F52F9D1A66166F00E9F478 /* Images.xcassets in Resources */,
+				F8FCBF4B1A68B783002797D8 /* CategoryTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,14 +335,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8EBCE911A68F3E5006128AC /* MyPieViewLayer.m in Sources */,
 				F8F52F921A66166F00E9F478 /* AppDelegate.m in Sources */,
+				F8EBCF011A68FBE2006128AC /* PieLayer.m in Sources */,
+				F8FCBF4A1A68B783002797D8 /* CategoryTableViewCell.m in Sources */,
 				F896DDDF1A6660B600692C69 /* AddNewCategoryViewController.m in Sources */,
 				F8F52F951A66166F00E9F478 /* Self_Track.xcdatamodeld in Sources */,
-				F8F52FB71A66178600E9F478 /* TimeTrack.m in Sources */,
 				F8F52F981A66166F00E9F478 /* ViewController.m in Sources */,
-				F8F52FBA1A66178600E9F478 /* CategoryTracked.m in Sources */,
+				F8EBCF001A68FBE2006128AC /* PieElement.m in Sources */,
+				F8EBCF0F1A691350006128AC /* TimeTrack.m in Sources */,
 				F8F52F8F1A66166F00E9F478 /* main.m in Sources */,
+				F8EBCF121A691351006128AC /* CategoryTracked.m in Sources */,
+				F8EBCEFF1A68FBE2006128AC /* NSMutableArray+pieEx.m in Sources */,
 				F8B472981A661D0D0053AE08 /* CoreDataFunctions.m in Sources */,
+				F8EBCF0C1A690A9D006128AC /* NKOColorPickerView.m in Sources */,
+				F8EBCE921A68F3E5006128AC /* MyPieElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

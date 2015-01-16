@@ -48,7 +48,9 @@
         
         NSDictionary* categoryWithDuration = @{
                                                @"name": category.name,
-                                               @"duration": [self stringSecondFromInterval:duration]
+                                               @"duration": [NSNumber numberWithDouble:duration],
+                                               @"color": category.color,
+                                               @"durationStr": [self stringSecondFromInterval:duration]
                                                };
         [listCategoryWithDuration addObject:categoryWithDuration];
     };
@@ -67,7 +69,7 @@
     }
     return -1;
 }
-+ (BOOL) addNewCategoryWithName: (NSString*) name {
++ (BOOL) addNewCategoryWithName: (NSString*) name  withChartColor: (UIColor*) color{
     if (name == nil) {
         return NO;
     }
@@ -80,6 +82,7 @@
     AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     CategoryTracked* newCategory = (CategoryTracked*)[NSEntityDescription insertNewObjectForEntityForName:@"CategoryTracked" inManagedObjectContext:delegate.managedObjectContext];
     newCategory.name = name;
+    newCategory.color = [NSKeyedArchiver archivedDataWithRootObject:color];
     return [self saveContent];
 }
 

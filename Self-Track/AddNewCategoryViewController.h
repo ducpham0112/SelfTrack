@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NKOColorPickerView.h"
 
-@interface AddNewCategoryViewController : UIViewController
+@interface AddNewCategoryViewController : UIViewController <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *tfCategoryName;
 - (IBAction)addCategory:(id)sender;
+@property (weak, nonatomic) IBOutlet NKOColorPickerView *colorPicker;
+@property (weak, nonatomic) IBOutlet UIView *pickedColor;
+
 
 @end

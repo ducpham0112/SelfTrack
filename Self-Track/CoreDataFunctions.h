@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface CoreDataFunctions : NSObject
 
 + (NSArray*) listCategory;
-+ (BOOL) addNewCategoryWithName: (NSString*) name ;
++ (BOOL) addNewCategoryWithName: (NSString*) name withChartColor: (UIColor*) color;
 + (BOOL) saveContent ;
 + (NSArray*) listCategoryWithDuration ;
 + (BOOL) addNewTimeWithStarttime: (NSDate*) startTime endTime:(NSDate*) endTime inCategoryWithName: (NSString*) categoryName;

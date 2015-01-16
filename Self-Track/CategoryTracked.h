@@ -2,7 +2,7 @@
 //  CategoryTracked.h
 //  Self-Track
 //
-//  Created by Duc Pham on 1/14/15.
+//  Created by Duc Pham on 1/16/15.
 //  Copyright (c) 2015 CSC. All rights reserved.
 //
 
@@ -14,6 +14,7 @@
 @interface CategoryTracked : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSData * color;
 @property (nonatomic, retain) NSSet *listTimeTracked;
 @end
 
