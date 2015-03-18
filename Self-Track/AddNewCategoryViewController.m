@@ -12,7 +12,10 @@
 
 @interface AddNewCategoryViewController ()
 
-@property(nonatomic, strong) NSArray        *sliceColors;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *rightBarButton;
+@property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
+@property BOOL isEdit;
+
 @end
 
 @implementation AddNewCategoryViewController
@@ -31,6 +34,19 @@
     
     [self.colorPicker setTintColor:[UIColor darkGrayColor]];
     
+    if (_isEdit) {
+        [self.colorPicker setColor:(UIColor*)[NSKeyedUnarchiver unarchiveObjectWithData:[_category objectForKey:@"color"]]];
+        _navItem.title = [_category objectForKey:@"name"];
+        _navItem.rightBarButtonItem.title = @"Save";
+        _tfCategoryName.text = [_category objectForKey:@"name"];
+        //_navItem.rightBarButtonItem = nil;
+    }
+    else {
+        [self.colorPicker setColor:[self randomColor]];
+        _navItem.title = @"New Category";
+        _navItem.rightBarButtonItem.title = @"Add";
+        //_tfCategoryName.text = [_category objectForKey:@"name"];
+    }
     [self setPickedColor];
 }
 
@@ -48,16 +64,39 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (UIColor*)randomColor
+{
+    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+}
 
-- (IBAction)addCategory:(id)sender {
+- (id) initWithCategory:(NSDictionary*) category{
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    AddNewCategoryViewController* categoryVC = [storyboard instantiateViewControllerWithIdentifier:@"categoryViewController"];
+    categoryVC.category = category;
+    categoryVC.isEdit = true;
+    return categoryVC;
+}
+
+- (IBAction)doneBtnClicked:(id)sender {
     [_tfCategoryName resignFirstResponder];
-    if ([CoreDataFunctions addNewCategoryWithName:_tfCategoryName.text withChartColor:self.colorPicker.color]) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ERROR!" message:@"Something wrong! Please try again." delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:@"Dismiss", nil];
-        [alert show];
+    if (_isEdit){
+        if ([CoreDataFunctions editCategoryWithName:[_category objectForKey:@"name"]  withNewName:_tfCategoryName.text hasColor:self.colorPicker.color]){
+            [self.navigationController popViewControllerAnimated:YES];
+        } else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ERROR!" message:@"Something wrong! Please try again." delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
+            [alert show];
+        }
+    } else {
+        if ([CoreDataFunctions addNewCategoryWithName:_tfCategoryName.text withChartColor:self.colorPicker.color]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ERROR!" message:@"Something wrong! Please try again." delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
+            [alert show];
+        }
     }
-    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

@@ -57,7 +57,6 @@
         self.layer.contentsScale = [[UIScreen mainScreen] scale];
     }
     
-    
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     tap.numberOfTapsRequired = 1;
     tap.numberOfTouchesRequired = 1;

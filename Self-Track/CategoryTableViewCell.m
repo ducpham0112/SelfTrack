@@ -17,7 +17,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     // Configure the view for the selected state
-    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    //[self setSelectionStyle:UITableViewCellSelectionStyleNone];
     _viewColor.layer.cornerRadius = 5;
 }
 

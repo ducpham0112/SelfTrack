@@ -12,8 +12,9 @@
 #import "CategoryTableViewCell.h"
 #import "MyPieElement.h"
 #import "PieLayer.h"
+#import "AppDelegate.h"
 
-#define PAGE_NUMBER 1
+#define PAGE_NUMBER 2
 #define SCROLL_VIEW_WIDTH 300
 
 @interface ViewController ()
@@ -25,6 +26,14 @@
 @property (strong, nonatomic) NSArray* sliceColors;
 @property (strong, nonatomic) NSUserDefaults* preference;
 
+@property (strong, nonatomic) NSDictionary* selectedCategory;
+@property (strong, nonatomic) NSIndexPath* selectedRow;
+
+@property BOOL isWeeklyReport;
+
+@property NSTimer* durationTimer;
+- (IBAction)changeReportType:(id)sender;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentType;
 
 @end
 
@@ -34,7 +43,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable) name:@"UpdateTable" object:nil];
-    _listCategory = [CoreDataFunctions listCategoryWithDuration];
+    
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged) name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
+    
+    _isWeeklyReport = _segmentType.selectedSegmentIndex == 1;
+    _listCategory = [CoreDataFunctions listCategoryWithDuration:_isWeeklyReport];
     
     _preference = [NSUserDefaults standardUserDefaults];
     _isTracking = [_preference boolForKey:@"IsTracking"] || NO;
@@ -42,25 +56,23 @@
     _startTime = [_preference objectForKey:@"StartTime"];
     
     [_tableView registerNib:[UINib nibWithNibName:@"CategoryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"categoryCell"];
+    [self updatePieChart:YES];
+    _lbCurCategoryName.alpha = 0;
+    _lbCurDuration.alpha = 0;
     
-    [self updatePieChart];
 }
 
-- (UIColor*)randomColor
-{
-    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
-    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+-(void) orientationChanged {
+    [self updatePieChart:NO];
 }
--(void) updatePieChart {
+-(void) updatePieChart:(BOOL) animated {
     [_myPieChart.layer deleteValues:[_myPieChart.layer values] animated:NO];
     for (NSDictionary* category in _listCategory) {
         double value = [[category objectForKey:@"duration"] doubleValue];
         UIColor* pieColor = (UIColor*)[NSKeyedUnarchiver unarchiveObjectWithData:[category objectForKey:@"color"]];
         MyPieElement* elem = [MyPieElement pieElementWithValue:value color:pieColor];
         
-        [_myPieChart.layer addValues:@[elem] animated:YES];
+        [_myPieChart.layer addValues:@[elem] animated:animated | NO];
     }
 }
 
@@ -70,8 +82,8 @@
 }
 
 - (void) updateTable {
-    _listCategory = [CoreDataFunctions listCategoryWithDuration];
-    [self updatePieChart];
+    _listCategory = [CoreDataFunctions listCategoryWithDuration:_isWeeklyReport];
+    [self updatePieChart:YES];
     [self.tableView reloadData];
 }
 #pragma mark - table view data source
@@ -104,25 +116,27 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    _selectedCategory = [_listCategory objectAtIndex:indexPath.row];
+    _selectedRow = indexPath;
+    
+    UITableViewCell* selectedCell = [_tableView cellForRowAtIndexPath:indexPath];
+    selectedCell.backgroundColor = [UIColor lightGrayColor];
+    
     if ([CoreDataFunctions getIndexOfCategoryWithName:_trackingCategory] == indexPath.row && _isTracking){
-        if ([CoreDataFunctions addNewTimeWithStarttime:_startTime endTime:[NSDate date] inCategoryWithName:_trackingCategory]) {
-            _isTracking = NO;
-            _trackingCategory = nil;
-            _startTime = nil;
-            NSLog(@"Stop");
-        }
+        NSString* message = [NSString stringWithFormat:@"Do you want to stop %@?", [_selectedCategory objectForKey:@"name"]];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Stop Tracking" message:message delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        alert.tag = 0;
+        [alert show];
+
         // alert else clause
         
     }
     else {
-        if (_isTracking){
-        [CoreDataFunctions addNewTimeWithStarttime:_startTime endTime:[NSDate date] inCategoryWithName:_trackingCategory];
-        }
-        _isTracking = YES;
-        _startTime = [NSDate date];
-        NSDictionary* selectedCategory = [_listCategory objectAtIndex:indexPath.row];
-        _trackingCategory = [selectedCategory objectForKey:@"name"];
-        NSLog(@"Start");
+        NSString* message = [NSString stringWithFormat:@"Do you want to start %@?", [_selectedCategory objectForKey:@"name"]];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Start Tracking" message:message delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        alert.tag = 1;
+        [alert show];
+        
     }
     [self save];
     return;
@@ -142,9 +156,7 @@
         frame.origin.y = 0.0f;
         
         self.piechart.frame = frame;
-        
-        
-        
+ 
         UILabel* lbValue = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         lbValue.text = [NSString stringWithFormat:@"Page %d", i];
         lbValue.backgroundColor = [UIColor clearColor];
@@ -174,6 +186,7 @@
     [_scrollView scrollRectToVisible:frame animated:YES];
 }
 */
+
 #pragma mark - functions
 - (void) save {
     dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 0.0);
@@ -185,4 +198,66 @@
     
 }
 
+#pragma mark - UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    CategoryTableViewCell* selectedCell = (CategoryTableViewCell*)[_tableView cellForRowAtIndexPath:_selectedRow];
+    selectedCell.backgroundColor = [UIColor whiteColor];
+    
+    switch (buttonIndex) {
+        case 1:
+            if (alertView.tag == 0){
+                if ([CoreDataFunctions addNewTimeWithStarttime:_startTime endTime:[NSDate date] inCategoryWithName:[_selectedCategory objectForKey:@"name"]]) {
+                    _isTracking = NO;
+                    _trackingCategory = nil;
+                    _startTime = nil;
+                    NSLog(@"Stop");
+                    
+                    [[selectedCell layer] removeAnimationForKey:@"opacity"];
+                    [_durationTimer invalidate];
+                    [self updateTable];
+                }
+            } else if (alertView.tag == 1){
+                NSDate* time = [NSDate date];
+                if (_isTracking){
+                    [CoreDataFunctions addNewTimeWithStarttime:_startTime endTime:time inCategoryWithName:_trackingCategory];
+                }
+                _isTracking = YES;
+                _trackingCategory = [_selectedCategory objectForKey:@"name"];
+                _startTime = time;
+                NSLog(@"Start");
+                
+                [self blinkAnimation:selectedCell];
+                _durationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateClock) userInfo:nil repeats:YES];
+            }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void) updateClock{
+    CategoryTableViewCell* selectedCell = (CategoryTableViewCell*)[_tableView cellForRowAtIndexPath:_selectedRow];
+    
+    double curDuration = [CoreDataFunctions durationFrom:_startTime To:[NSDate date]] + [[[_listCategory objectAtIndex:_selectedRow.row] objectForKey:@"duration"] doubleValue];
+    
+    selectedCell.lbDuration.text = [CoreDataFunctions stringSecondFromInterval:curDuration];
+}
+
+- (void) blinkAnimation: (UIView*) view {
+    CABasicAnimation *blinkAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [blinkAnimation setFromValue:[NSNumber numberWithFloat:1.0]];
+    [blinkAnimation setToValue:[NSNumber numberWithFloat:0.2]];
+    [blinkAnimation setDuration:1.0f];
+    [blinkAnimation setTimingFunction:[CAMediaTimingFunction
+                                       functionWithName:kCAMediaTimingFunctionLinear]];
+    [blinkAnimation setAutoreverses:YES];
+    [blinkAnimation setRepeatCount:INT32_MAX];
+    [[view layer] addAnimation:blinkAnimation forKey:@"opacity"];
+}
+
+- (IBAction)changeReportType:(id)sender {
+    _isWeeklyReport = _segmentType.selectedSegmentIndex == 1;
+    [self updateTable];
+}
 @end

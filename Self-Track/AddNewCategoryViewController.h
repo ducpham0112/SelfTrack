@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "NKOColorPickerView.h"
+#import "CategoryTracked.h"
 
 @interface AddNewCategoryViewController : UIViewController <UIAlertViewDelegate>
+@property(nonatomic, strong) NSDictionary* category;
+
 @property (weak, nonatomic) IBOutlet UITextField *tfCategoryName;
-- (IBAction)addCategory:(id)sender;
+- (IBAction)doneBtnClicked:(id)sender;
 @property (weak, nonatomic) IBOutlet NKOColorPickerView *colorPicker;
 @property (weak, nonatomic) IBOutlet UIView *pickedColor;
 
-
+- (id) initWithCategory:(NSDictionary*) category;
 @end

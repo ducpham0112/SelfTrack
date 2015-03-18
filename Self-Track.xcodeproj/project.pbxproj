@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F82D5BD61AB6D2D700567A81 /* ListCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F82D5BD51AB6D2D700567A81 /* ListCategoryTableViewController.m */; };
 		F831AA4E1A67AA0F00570B7C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F831AA4D1A67AA0F00570B7C /* QuartzCore.framework */; };
 		F896DDDF1A6660B600692C69 /* AddNewCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F896DDDE1A6660B600692C69 /* AddNewCategoryViewController.m */; };
 		F8B472981A661D0D0053AE08 /* CoreDataFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B472971A661D0D0053AE08 /* CoreDataFunctions.m */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F82D5BD41AB6D2D700567A81 /* ListCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCategoryTableViewController.h; sourceTree = "<group>"; };
+		F82D5BD51AB6D2D700567A81 /* ListCategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCategoryTableViewController.m; sourceTree = "<group>"; };
 		F831AA4D1A67AA0F00570B7C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F896DDDD1A6660B600692C69 /* AddNewCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewCategoryViewController.h; sourceTree = "<group>"; };
 		F896DDDE1A6660B600692C69 /* AddNewCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewCategoryViewController.m; sourceTree = "<group>"; };
@@ -201,6 +204,8 @@
 				F8FCBF471A68B783002797D8 /* CategoryTableViewCell.h */,
 				F8FCBF481A68B783002797D8 /* CategoryTableViewCell.m */,
 				F8FCBF491A68B783002797D8 /* CategoryTableViewCell.xib */,
+				F82D5BD41AB6D2D700567A81 /* ListCategoryTableViewController.h */,
+				F82D5BD51AB6D2D700567A81 /* ListCategoryTableViewController.m */,
 			);
 			path = "Self-Track";
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 				F896DDDF1A6660B600692C69 /* AddNewCategoryViewController.m in Sources */,
 				F8F52F951A66166F00E9F478 /* Self_Track.xcdatamodeld in Sources */,
 				F8F52F981A66166F00E9F478 /* ViewController.m in Sources */,
+				F82D5BD61AB6D2D700567A81 /* ListCategoryTableViewController.m in Sources */,
 				F8EBCF001A68FBE2006128AC /* PieElement.m in Sources */,
 				F8EBCF0F1A691350006128AC /* TimeTrack.m in Sources */,
 				F8F52F8F1A66166F00E9F478 /* main.m in Sources */,

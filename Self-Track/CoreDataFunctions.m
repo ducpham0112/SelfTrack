@@ -25,7 +25,6 @@
     return [NSString stringWithFormat:@"%.2d:%.2d:%.2d", ti / SECONDS_PER_HOUR, (ti / SECONDS_PER_MINUTE) % MINUTES_PER_HOUR, ti % SECONDS_PER_MINUTE];
 }
 
-
 + (NSTimeInterval)durationFrom:(NSDate *)startTime To:(NSDate *)endTime {
     NSTimeInterval totalTime = ([endTime timeIntervalSinceDate:startTime]);
     return totalTime;
@@ -35,15 +34,28 @@
     return delegate.fetchedResultsController.fetchedObjects;
 }
 
-+ (NSArray*) listCategoryWithDuration {
++ (NSInteger) daysWithinEraFromDate: (NSDate*) startDate toDate: (NSDate*) endDate{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDate* fromDate, *toDate;
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate interval:NULL forDate:startDate];
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate interval:NULL forDate:endDate];
+    
+    NSDateComponents* diff = [calendar components:NSCalendarUnitDay fromDate:fromDate toDate:toDate options:0];
+    return [diff day];
+}
+
++ (NSArray*) listCategoryWithDuration: (BOOL) type {
     NSMutableArray* listCategoryWithDuration = [[NSMutableArray alloc] init];
+    
     for (CategoryTracked* category in [self listCategory]) {
         NSArray* listTime = [category.listTimeTracked allObjects];
-        
-        //add filter
+        NSInteger day = type ? 7 : 30;
         double duration = 0;
         for (TimeTrack* time in listTime) {
-            duration += [time.duration doubleValue];
+            NSInteger diff = [self daysWithinEraFromDate:(NSDate*)time.startTime toDate:[NSDate date]];
+            if (diff < day) {
+                duration += [time.duration doubleValue];
+            }
         }
         
         NSDictionary* categoryWithDuration = @{
@@ -86,11 +98,31 @@
     return [self saveContent];
 }
 
++ (BOOL) editCategoryWithName: (NSString*) oldName withNewName: (NSString*) newName hasColor:(UIColor*) color {
+    CategoryTracked* category;
+    for (CategoryTracked* cat in [self listCategory]) {
+        if ([cat.name isEqualToString:oldName]) {
+            category = cat;
+            break;
+
+        }
+    }
+    if (category == nil) {
+        return NO;
+    }
+    
+    category.name = newName;
+    category.color = [NSKeyedArchiver archivedDataWithRootObject:color];
+    
+    return [self saveContent];
+}
+
 + (BOOL) addNewTimeWithStarttime: (NSDate*) startTime endTime:(NSDate*) endTime inCategoryWithName: (NSString*) categoryName{
     CategoryTracked* category = nil;
     for (CategoryTracked* cat in [self listCategory]) {
         if ([cat.name isEqualToString:categoryName]){
             category = cat;
+            break;
         }
     }
     if (category == nil) {
